@@ -30,7 +30,7 @@ interface ImageContainerProps {
 const Header = () => {
   const [isOpen, setIsOpen] = useState(true);
   return (
-    <div className="h-[60px] w-screen flex border-b-solid border-b-1 border-b-gray-200 items-center gap-2 px-[10px]">
+    <div className="fixed bg-white top-0 w-full z-50 h-[60px] w-screen sticky flex border-b-solid border-b-1 border-b-gray-200 items-center gap-2 px-[10px]">
       <img
         className="h-[40px] w-[30px] object-cover"
         src={
