@@ -41,7 +41,10 @@ const Header = () => {
         onClick={() => setIsOpen(!isOpen)}
         alt="freerooms-logo"
       />
-      <div className="flex-auto font-bold text-xl text-orange-400">Freerooms</div>
+      <div className="flex-auto sm:hidden"></div>
+      <div className="hidden sm:block flex-auto font-bold text-xl text-orange-400">
+        Freerooms
+      </div>
       <Container>
         <SearchIcon />
       </Container>
@@ -71,9 +74,14 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
 
 const SearchBar = () => {
   return (
-    <div className="w-[50%] h-[42px] flex border-solid rounded-sm border-1 border-gray-200 items-center pl-2 text-gray-500">
+    <div className="w-full sm:w-[50%] h-[42px] flex border-solid rounded-sm border-1 border-gray-200 items-center pl-2 text-gray-500">
       <SearchIcon className="flex-grow" />
-      <Textarea name="Plain" placeholder="Search for a building" variant="plain" className="h-full w-full p-none"/>
+      <Textarea
+        name="Plain"
+        placeholder="Search for a building"
+        variant="plain"
+        className="h-full w-full p-none"
+      />
     </div>
   );
 };
@@ -100,13 +108,15 @@ const ImageContainer: React.FC<ImageContainerProps> = ({
 }) => {
   console.log(src);
   return (
-    <div className="relative bg-white rounded-md overflow-hidden">
-      <img src={src} alt={name} className="h-full object-cover" />
-      <div className="absolute flex items-center top-2 right-[2.5%] bg-white text-black text-xs px-2 py-1 rounded-md shadow-md">
+    <div className="relative max-h-[100px] sm:max-h-full bg-white rounded-md overflow-hidden">
+      <img src={src} alt={name} className="sm:h-full sm:object-cover" />
+      <div className="absolute top-[40%] flex items-center sm:top-2 right-[2.5%] bg-white text-black text-xs px-2 py-1 rounded-md shadow-md">
         <div className="w-2 h-2 bg-green-500 text-tiny rounded-full mr-2"></div>
-        {availability} rooms available
+        {availability}
+        <div className="hidden sm:block sm:pl-[3px]"> rooms available</div>
+        <div className="sm:hidden block pl-[3px]">{"/ " + availability}</div>
       </div>
-      <div className="absolute bottom-2 left-[2.5%] w-[95%] bg-orange-500 text-xs text-white px-2 py-2 rounded-md">
+      <div className="absolute bottom-[40%] sm:bottom-2 sm:left-[2.5%] sm:w-[95%] sm:bg-orange-500 text-xs text-white px-2 py-2 rounded-md">
         {name}
       </div>
     </div>
@@ -118,7 +128,7 @@ function App() {
     <>
       <div className="w-screen">
         <Header />
-        <div className="flex my-3 px-[10px]">
+        <div className="hidden sm:flex flex mt-3 px-[10px]">
           <ContainerRectangle text={"Filter"}>
             <FilterAltIcon />
           </ContainerRectangle>
@@ -129,7 +139,21 @@ function App() {
             <FilterListIcon />
           </ContainerRectangle>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-max gap-[10px] p-3">
+        <div className="sm:hidden px-[10px] mt-3">
+          <div className="flex-auto mb-3 flex content-center justify-center items-center">
+            <SearchBar />
+          </div>
+          <div className="flex">
+            <ContainerRectangle text={"Filter"}>
+              <FilterAltIcon />
+            </ContainerRectangle>
+            <div className="flex-auto"></div>
+            <ContainerRectangle text={"Sort"}>
+              <FilterListIcon />
+            </ContainerRectangle>
+          </div>
+        </div>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 auto-rows-max gap-[10px] p-3">
           {buildings.map((building) => (
             <ImageContainer
               key={building.name}
